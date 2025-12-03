@@ -44,7 +44,8 @@ class InstallCommand extends Command
                 file: resource_path('views/layouts/sidebar.blade.php'),
                 content: "@include('dashboard.fees.partials.actions.sidebar')",
                 before: "@include('dashboard.settings.sidebar')",
-            );
+            )
+            ->publish();
 
         app(Modifier::class)->permission('fee');
 
