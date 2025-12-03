@@ -35,7 +35,7 @@ class InstallCommand extends Command
 
         $crud = app(Generator::class)->crud('fee');
 
-        $crud->fromPath(__DIR__.'/../../../stubs')
+        $crud->fromPath(__DIR__.'/../../stubs')
             ->toPath(base_path())
             ->appendReplacements([
                 'create_fees_table' => date('Y_m_d_His') . '_create_fees_table',
