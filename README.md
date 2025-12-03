@@ -12,3 +12,7 @@ composer require eventat-modules/fees --dev
 ```shell
 php artisan fees:install
 ```
+
+```shell
+php artisan migrate
+```
