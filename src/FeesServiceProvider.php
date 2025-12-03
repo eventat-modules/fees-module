@@ -1,11 +1,11 @@
 <?php
 
-namespace Eventat\ModuleName;
+namespace Eventat\Fees;
 
+use Eventat\Fees\Commands\InstallCommand;
 use Illuminate\Support\ServiceProvider;
-use Eventat\ModuleName\Commands\InstallCommand;
 
-class ModuleNameServiceProvider extends ServiceProvider
+class FeesServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.

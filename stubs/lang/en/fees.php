@@ -1,0 +1,60 @@
+<?php
+
+return [
+    'singular' => 'Fee',
+    'plural' => 'Fees',
+    'empty' => 'There are no fees yet.',
+    'count' => 'Fees Count.',
+    'search' => 'Search',
+    'select' => 'Select Fee',
+    'permission' => 'Manage fees',
+    'trashed' => 'Trashed fees',
+    'perPage' => 'Results Per Page',
+    'filter' => 'Search for fee',
+    'actions' => [
+        'list' => 'List All',
+        'create' => 'Create a new fee',
+        'show' => 'Show fee',
+        'edit' => 'Edit fee',
+        'delete' => 'Delete fee',
+        'restore' => 'Restore',
+        'forceDelete' => 'Delete Forever',
+        'options' => 'Options',
+        'save' => 'Save',
+        'filter' => 'Filter',
+    ],
+    'messages' => [
+        'created' => 'The fee has been created successfully.',
+        'updated' => 'The fee has been updated successfully.',
+        'deleted' => 'The fee has been deleted successfully.',
+        'restored' => 'The fee has been restored successfully.',
+    ],
+    'attributes' => [
+        'name' => 'Fee name',
+        '%name%' => 'Fee name',
+        'description' => 'Fee description',
+        '%description%' => 'Fee description',
+        'price' => 'Price',
+        'active' => 'Active',
+    ],
+    'dialogs' => [
+        'delete' => [
+            'title' => 'Warning !',
+            'info' => 'Are you sure you want to delete the fee ?',
+            'confirm' => 'Delete',
+            'cancel' => 'Cancel',
+        ],
+        'restore' => [
+            'title' => 'Warning !',
+            'info' => 'Are you sure you want to restore the fee ?',
+            'confirm' => 'Restore',
+            'cancel' => 'Cancel',
+        ],
+        'forceDelete' => [
+            'title' => 'Warning !',
+            'info' => 'Are you sure you want to delete the fee forever ?',
+            'confirm' => 'Delete Forever',
+            'cancel' => 'Cancel',
+        ],
+    ],
+];

@@ -1,13 +1,10 @@
 <?php
 
-namespace Eventat\ModuleName\Commands;
+namespace Eventat\Fees\Commands;
 
+use AhmedAliraqi\CrudGenerator\Console\Commands\Modifier;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\App;
-use Eventat\ModuleGenerator\Generator;
-use Illuminate\Support\Facades\Process;
-
-use function Laravel\Prompts\multiselect;
+use LaravelModules\ModuleGenerator\Generator;
 
 class InstallCommand extends Command
 {
@@ -16,19 +13,14 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'module-name:install';
+    protected $signature = 'fees:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install module name';
-
-    /**
-     * The list of the starter kit's features.
-     */
-    protected array $features = [];
+    protected $description = 'Install fees module';
 
     /**
      * Execute the console command.
@@ -37,87 +29,29 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->info('⌛ Installing module name ...');
+        $this->info('⌛ Installing fees module ...');
 
         $this->newLine();
 
-        $this->askForRequestedFeatures();
+        $crud = app(Generator::class)->crud('fee');
 
-        if (in_array('feature1', $this->features)) {
-            $this->installFeatureOne();
-        }
+        $crud->fromPath(__DIR__.'/../../../stubs')
+            ->toPath(base_path())
+            ->appendReplacements([
+                'create_fees_table' => date('Y_m_d_His') . '_create_fees_table',
+            ])
+            ->appendToFile(
+                file: resource_path('views/layouts/sidebar.blade.php'),
+                content: "@include('dashboard.fees.partials.actions.sidebar')",
+                before: "@include('dashboard.settings.sidebar')",
+            );
 
-        if (in_array('feature2', $this->features)) {
-            $this->installFeatureTwo();
-        }
+        app(Modifier::class)->permission('fee');
 
-        $this->updateComposer();
+        app(Modifier::class)->softDeletes('fee');
 
-        $this->newLine();
+        app(Modifier::class)->langGenerator('fee');
 
-        $this->info('✅ All Done');
-    }
-
-    protected function installFeatureOne(): void
-    {
-        $this->line('⌛ Installing feature 1 ...');
-
-        $this->newLine();
-
-        $this->generator()
-            ->publish(__DIR__.'/../../stubs/feature-1')
-            ->registerServiceProvider('App\Providers\FeatureOneServiceProvider');
-
-        // Steps to install feature ...
-
-        $this->info('✅ Feature one has been installed.');
-    }
-
-    protected function installFeatureTwo(): void
-    {
-        $this->line('⌛ Installing feature 2 ...');
-
-        $this->newLine();
-
-        $this->generator()
-            ->publish(__DIR__.'/../../stubs/feature-2')
-            ->registerServiceProvider('App\Providers\FeatureTwoServiceProvider');
-
-        // Steps to install feature ...
-
-        $this->info('✅ Feature two has been installed.');
-    }
-
-    /**
-     * Ask about features you want to install.
-     */
-    protected function askForRequestedFeatures(): void
-    {
-        $this->features = multiselect(
-            label: 'Select the features that you want to install.',
-            options: [
-                'feature1' => 'Feature One',
-                'feature2' => 'Feature Two',
-            ],
-            default: ['feature1', 'feature2'],
-        );
-    }
-
-    /**
-     * Update composer packages.
-     */
-    protected function updateComposer(): void
-    {
-        Process::run('composer update', function ($type, $output) {
-            $this->line($output);
-        });
-    }
-
-    /**
-     * Get the module generator instance.
-     */
-    protected function generator(): Generator
-    {
-        return App::make(Generator::class);
+        $this->info('✅ Fees module has been installed successfully.');
     }
 }
