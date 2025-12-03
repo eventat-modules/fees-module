@@ -1,4 +1,4 @@
-## Module Name
+## Fees Module
 
 This fees module for the eventat's projects.
 
