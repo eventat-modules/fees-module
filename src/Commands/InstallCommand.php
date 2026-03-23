@@ -33,7 +33,7 @@ class InstallCommand extends Command
     {
         $this->info('⌛ Installing fees module ...');
 
-        $name = $this->argument('name') ?? text('What is the CRUD name?', 'fee');
+        $name = $this->argument('name') ?? text(label: 'What is the CRUD name?', default: 'fee');
 
         $viewPath = str($name)->plural()->kebab()->toString();
 
